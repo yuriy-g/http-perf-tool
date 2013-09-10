@@ -1,0 +1,49 @@
+<configuration>
+
+  <timestamp key="bySecond" datePattern="yyyyMMdd-HHmmss" 
+             timeReference="contextBirth"/>
+
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d [%thread] %-5level %logger{35} - %msg %n</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+    <file>log/out-${bySecond}.log</file>
+    <append>false</append>
+    <encoder>
+      <pattern>%d %-5level %logger{35}: %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <!--appender name="DUMP" class="ch.qos.logback.core.FileAppender">
+    <file>log/dump-${bySecond}.log</file>
+    <append>false</append>
+    <encoder>
+      <pattern>%d %-5level %logger{35}: %msg%n</pattern>
+    </encoder>
+  </appender-->
+
+  <appender name="STAT" class="ch.qos.logback.core.FileAppender">
+    <file>log/stat-${bySecond}.csv</file>
+    <append>false</append>
+    <encoder>
+      <pattern>%msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <!--logger name="dump" level="DEBUG" additivity="false">
+      <appender-ref ref="DUMP" />
+  </logger-->  
+
+  <logger name="stat" level="TRACE" additivity="false">
+      <appender-ref ref="STAT" />
+  </logger>  
+
+  <root level="INFO">
+      <appender-ref ref="STDOUT" />
+      <appender-ref ref="FILE" />
+  </root>
+
+</configuration>
